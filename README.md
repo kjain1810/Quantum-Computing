@@ -18,7 +18,7 @@ Our report included a brief introduction to quantum mechanics and how it gave ri
 
 We then went on to explain the 3 cornerstone algorithms of computing computing in detail: 
 
-1. Simon's Algorithm: One of the first algorithm which exploited the use of the quantum particles and the information they store, gave an exponential speed up to the simon's problem of finding period of an unknown boolean black box function. Paved way for other algorithms such as the shor's algorithm and other period finding base algorithms.
+1. Simon's Algorithm: One of the first algorithm which exploited the use of the quantum particles and the information they store, gave an exponential speed up to the simon's problem of finding period of an unknown boolean black box function. Paved way for other algorithms such as the shor's algorithm and other period finding  algorithms.
 2. Shor's Factoring Algorithm: Shor's algorithm is one of the algorithms that shows how quantum computers can give exponential speedups over classical algorithms. This factoring algorithm has the potential to break the RSA encryption which is considered as the standard and most secure among the encryption methods.
 3. Grover's Search Algorithm
 
