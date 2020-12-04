@@ -28,5 +28,11 @@ Our presentation also included a talk about some of the interesting applications
 
 1. Ryan O'Donnel's lectures on QC at CMU [[link](https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5qLskC6xQ24JpMwOAeJz)]
 2. Ronald de Wolf's notes on Quantum Computing [[link](https://homepages.cwi.nl/~rdewolf/qcnotes.pdf)]
-3. Quantum Mechanics and Quantum Computing by Umesh Vazirani [[link](https://courses.edx.org/courses/course-v1:BerkeleyX+CS-191x+2T2020/course/)]
-4. 
+3. Quantum Computing and Quantum Information by Nelson and Chuang [[link](http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf)]
+4. Quantum Mechanics and Quantum Computing by Umesh Vazirani [[link](https://courses.edx.org/courses/course-v1:BerkeleyX+CS-191x+2T2020/course/)]
+5. Qiskit community [[link](Qiskit.org)]
+6. QC - Quantum Computing Series by Jonathan Hui [[link](https://jonathan-hui.medium.com/qc-quantum-computing-series-10ddd7977abd)]
+
+## Team members
+
+The team comprised of Kunal Jain, Samay Kothari and Naman Ahuja
