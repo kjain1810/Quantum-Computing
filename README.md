@@ -13,7 +13,7 @@ Finally, after we had a good understanding on how things work in quantum world a
 ## Presentation and Report
 
 Our report included a brief introduction to quantum mechanics and how it gave rise to quantum computing. It introduced and explained some of the basic fundamentals of quantum computing, the Principle of Delayed Measurement and Quantum Erasure which can be considered as an advancement to the double slit experiment.<br/>
-1. In this experiment scietists tried to get the interference pattern(position) and the knowledge of the slit from which it passed(momentum) but the photon prevented it from making sure that the information remains hidden and the particle follows the uncertainty principle.
+1. In this experiment scietists tried to get the interference pattern(position) and the knowledge of the slit from which it passed(momentum) but the photon prevented it by making sure that the information remains hidden and the particle follows the uncertainty principle.
 2. One of the major observation that can be made from the experiment was photons predicting the measurement(position or momentum measurement) of their entangled counterparts done in future, explanation of such behaviour comes down to the time depedence of the measurment and the behaviour of entangled quantum particles.
 
 We then went on to explain the 3 cornerstone algorithms of computing computing in detail: 
