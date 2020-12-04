@@ -1,0 +1,44 @@
+\chapter{Simon's algorithm}
+\section{Introduction}
+Let $N = 2^n$ and the set $\{0, 1, .. N - 1\}$ be written as $\{0, 1\}^n$ and let $i + j$ be bitwise modulo 2 addition of $i$ and $j$. \\
+For example, $110 + 011$ would result in $101$ as $1 + 0 = 1\mod2$ for the first bit, $1 + 1 = 0\mod2$ for the second bit and $0 + 1 = 1\mod2$ for the third bit. 
+\section{The problem}
+For a given $N$, let there be a secret function $x = (x_{0}, x_{1},..., x_{N - 1})$ where $x_{i} = \{0, 1\}^n$ with the property that for some unknown $s$, $x_{i} = x_{j}$ iff $i = j$ or $i = j + s$. \\ \\
+Our task is to find out $s$ using the function $x$
+\section{Classical solutions}
+One of the most simple and efficient classical algorithms for this is to randomly get $X$ values from the function $x$. Let the set of distinct numbers be $\{a_{1}, a_{2},...,a_{X}\}$. The probability that atleast 2 of them yield us the same value can be calculated with the help of the birthday paradox. \\
+The number of pairs in our selected set that could yield us the same value are $\Comb{X}{2}$ $\sim \frac{X^2}{2}$ and the probability for any given pair to have the same value is $\frac{1}{N - 1}$. \\
+Using linearity of expectation, we can expect approximately $\frac{X^2}{2 * N}$ pairs to have the same value. \\
+Thus, choosing $T = \sqrt{2^\left(n + 1\right)}$, we can expect about $1$ pair to have the same value and thus find the value of $s$.
+\section{Quantum solution}
+Given the exponential complexity for the simon's algorithm using classical computers, using the quantum algorithms we can improve the time complexity to linear time. \\
+\begin{enumerate}
+    \item We use 2n zero qubits $\ket{0^n}\ket{0^n}$ and then apply hadamard transforms to the first n qubits only, which will result in state:
+    \begin{equation*}
+        \frac{1}{\sqrt{2^n}} \sum_{i \in \{0,1\}^n} \ket{i}\ket{0^n}
+    \end{equation*}
+    \item Now this state is passed through the black box, that is given to us and is known to be periodic, this query turns this into:
+    \begin{equation*}
+        \frac{1}{\sqrt{2^n}} \sum_{i \in \{0,1\}^n} \ket{i}\ket{x_i}
+    \end{equation*}
+    \item Now the second n-bit register is measured and the state collapses to one of the given distinct answers that are possible for the function with probability $\frac{1}{\sqrt{2^n}}$, now the state can be written as:
+    \begin{equation*}
+        \frac{1}{\sqrt{2}}(\ket{i} + \ket{i \bigoplus s} \ket{x_i})
+    \end{equation*}
+    \item Now we will ignore the second n bit register that have the $\ket{x_i}$ state and then apply Hadamard transforms(inverse fourier transform) to the first n qubits. We can write the state further as:
+    \begin{equation*}
+        \frac{1}{\sqrt{2^{n+1}}} \Bigg(\sum_{j\in\{0,1\}^n}(-1)^{i.j}\ket{j}+\sum_{j\in\{0,1\}^n}(-1)^{(i\bigoplus s).j}\ket{j} \Bigg)
+    \end{equation*}
+    \item Now this can be written as(using $(i\bigoplus s).j = (i.j)\bigoplus (s.j)$:
+    \begin{equation*}
+        \frac{1}{\sqrt{2^{n+1}}} \Bigg(\sum_{j\in\{0,1\}^n}(-1)^{i.j}(1+(-1)^{(s.j)}\ket{j}) \Bigg)
+    \end{equation*}
+    \item Now if we look at the state equation we can see that $\ket{j}$ has non-zero amplitude if and only if $s.j=0 \mod 2$. Measuring the state gives us a uniformly random element from the set $\{j | s.j = 0 \mod 2\}$. So we will get a linear equation that gives information about s since we already know what j is(result of measurement of after the inverse fourier transform is done).
+    \item Now we repeat these steps until we get distinct $n-1$ linear equation for s. The solutions to linear equation will give us correct s(can be done in complexity of $\mathcal{O}(n^3)$. You will get $n-1$ linearly independent equations in $4n$ steps of this algorithm with $0.99\%$ probability.
+\end{enumerate}
+
+\section{Analysis and comparison}
+Thus, we see an exponential speed up in this case. \\
+The classical algorithm gives an expected value of $\sqrt{\frac{2^n}{2}}$ required queries to find out the value of $s$ while the quantum algorithm can find $s$ in 4n queries and some polynomial classical computations(for solving the linear equations) with $0.99$ probability. \\
+This speeds up our expected query complexity from $\Omega(\sqrt{N})$ to $\mathcal{O}(n)$ \\
+The speed up serves a major speed up for Shor's algorithm and is a subset of the Abelian hidden subgroup problem.

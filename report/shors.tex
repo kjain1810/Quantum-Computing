@@ -1,0 +1,89 @@
+\chapter{Shor's factoring algorithm}
+\section{Introduction}
+Given a number $N$, we are trying to find it's prime factors.
+
+\section{Classical solutions}
+The numbers that are the hardest to factorize have found to been products of 2 large prime numbers. The best classical algorithm published till now is the General Number Field Sieve (GNFS) Algorithm that runs on a $b$ bit number $n$ times in time complexity: 
+\\
+\begin{equation*}
+    exp \left(\left(\sqrt[3]{\frac{64}{9}} + o(1)\right)\left(\ln{n}\right)^\frac{1}{3}\left(\ln{\ln{n}}\right)\right)
+\end{equation*}
+which is still exponential.
+
+\section{Importance and RSA encryption}
+Almost all modern cryptography techniques rely on the assumption that it is very hard to factorize numbers that are the products of 2 large prime numbers, and that this can not be done in better than exponential time with respect to number of digits. Such numbers are called semi-primes. \\
+RSA, named after it's creators Rivest, Shamir and Adleman, is one of the oldest and most widely used algorithm that relies on this assumption. RSA laboratories even released a list of semi-primes in 1991 as part of the RSA Factoring Challenge for people to factories and even rewarded the people who did. The largest semi prime released by them had 2048 digits, the largest that has till now gotten factored has 250. \\
+This goes on to show how integral the lack of a classical fast factorization algorithm for semi-primes is to the world of cryptography.
+
+\section{Period Finding}
+The cornerstone observation of Shor's algorithm is it's reduction of factoring to period finding. There already exists an efficient algorithm for period finding which uses quantum computing. \\
+Suppose we are trying to factor a number $N$. If $N$ is even or a prime power, we check and solve those using efficient classical algorithms. For the cases when $N$ is odd and not a prime power, we randomly pick a number $x \in \{2, ..., N - 1\}$. We can check if $x$ is coprime to $N$ or not using classical algorithms again. \\
+Now, we have $N$, which is odd and not a prime power, and $x$, which is a coprime to $N$. Considering the sequence $x^0 = 1\:mod N, x\:mod N, x^2\:mod N, ...$ in the multiplative group $\mathbb{Z^*_{N}}$. The sequence cycles itself after some time. Assuming the period to be $r$, we can say that
+\begin{equation*}
+    x^r = 1 \mod{N}
+\end{equation*}
+\begin{equation*}
+    x^r - 1 = 0 \mod{N}
+\end{equation*}
+\begin{equation*}
+    (x^\frac{r}{2})^2 - 1^2 = 0 \mod{N}
+\end{equation*}
+\begin{equation*}
+    (x^\frac{r}{2} - 1)(x^\frac{r}{2} + 1) = 0 \mod{N}
+\end{equation*}
+\begin{equation*}
+    (x^\frac{r}{2} - 1)(x^\frac{r}{2} + 1) = k \text{N for some k}
+\end{equation*}
+Now, we can prove that the probability of $r$ being even and $x^\frac{r}{2} + 1$ and $x^\frac{r}{2} - 1$ are not multiple of $N$ is $\geq 1/2$. \\
+Hence, when that is the case, we can compute compute $gcd(N, x^\frac{r}{2} + 1)$ and $gcd(N, x^\frac{r}{2} - 1)$ to get 2 non trivial factors of $N$!
+\section{Shor's Algorithm}
+\begin{enumerate}
+    \item We are given a number B which is an m bit number and is product of two large prime numbers P and Q. Consider $m \simeq 1000$ and P and Q to be $m/2$ bit numbers
+    \item Then we assume R as non-trivial square root of $1\mod B$
+    \begin{equation*}
+        R \neq \pm 1 \mod B
+    \end{equation*}
+    \begin{equation*}
+        R^2 - 1 = 0 \mod B \notag \\
+    \end{equation*}
+    \begin{equation*}
+         (R-1)(R+1) = 0\mod B \;\; also \: B = P * Q
+    \end{equation*}
+    \item Since P and Q are prime numbers so we will have $P/(R-1)$ and $Q/(R+1)$
+    \item So we have that $\gcd(R+1, B)$ gives us either P or Q
+    \item Now we have to find R
+    \item Let us consider 
+    \begin{equation*}
+        \begin{split}
+            Z_B^* &=  \{integers A \in Z_B \:with \gcd(A,B) = 1\} \notag \\
+            &= \{integers A \in Z_B \:such\: that \:A^{-1}\mod B \:exists\}
+        \end{split}
+    \end{equation*}
+    \item Now we pick A randomly between 0 to B-1 and calculate $\gcd(A,B)$, let's take A to be about $m/2$ bit number.
+    \begin{itemize}
+        \item If the $\gcd(A,B) = 1$ (which will be the case most of the times) then we can proceed further.
+        \item If the $\gcd(A,B) \neq 1$, which is very less likely, then there is no need to proceed further, A will be P or Q.
+    \end{itemize}
+    \item Now we can see that
+    \begin{equation*}
+        \begin{matrix}
+            A \mod B \\
+            A^2 \mod B \\
+            A^3 \mod B \\
+            \vdots \\
+            A^L \mod B = 1
+        \end{matrix}
+    \end{equation*}
+    Also for each of powers of A, $A^i \mod$ B will be distinct, because if it is not $A^{i-j} \mod B = 1$ for i and j having same value for $A^x \mod B$.
+    \item Now we can define L as the order of A in $Z_B^*$ \\ \\
+     Since we have B as pretty large, then L is also large, so we can't just keep on calculating for powers of A modulo B to find L. This is where we incorporate quantum computing into the picture, before this all of the computations are be done classically. \\ \\
+     We now have a function which is L periodic given by $F_A(X) = A^X \mod B$, the period L of the function is dependent on randomly chosen A. 
+    
+     
+\end{enumerate}
+\section{Analysis and comparison}
+We can calculate the function F using modular exponentiation, which makes it solvable in ``P'', the complexity for the same will be $\mathcal{O}(m^3)$, in fact this can be reduced to $\mathcal{O}(m^2)$ time. Now this function can be implemented using $m^3$ classical logic gates.\\
+Thus using $m^3$ quantum gates(quantum circuit $Q_F$) we can implement F in a reversible manner. \\
+Thus we will be having a quantum circuit which implements a periodic function with period L(which is unknown to us).\\
+\\
+Even the best of classical algorithms are able to factorize semiprime numbers in exponential time whereas Shor's algorithm is able to do so in polynomial complexity ($\mathbb{O}(m^3)$ quantum gates and $\mathbb{O}(m^3)$ classical gates).

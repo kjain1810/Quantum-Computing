@@ -1,0 +1,31 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\title{Report on Quantum Computing \\Algorithm Analysis and Design Project}
+\author{\begin{tabular}{c  c}
+Samay Kothari & \texttt{2019113017} \\
+Kunal Jain & \texttt{2019111037} \\
+Naman Ahuja & \texttt{2019101042} \\
+\end{tabular}}
+\date{November 2020}
+\usepackage{amsmath,amsfonts,amssymb,mathtools, listing, placeins}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{mhchem}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+\newcommand*{\Perm}[2]{{}^{#1}\!P_{#2}}%
+\newcommand*{\Comb}[2]{{}^{#1}C_{#2}}%
+\graphicspath{{./images/}}
+\begin{document}
+
+\maketitle
+\input{introduction}
+\input{delayedmeasurement}
+\input{simons}
+\input{shors}
+\input{grovers}
+\input{conclusion}
+
+
+\end{document}
