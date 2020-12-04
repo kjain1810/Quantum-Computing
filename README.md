@@ -12,10 +12,14 @@ Finally, after we had a good understanding on how things work in quantum world a
 
 ## Presentation and Report
 
-Our report included a brief introduction to quantum mechanics and how it gave rise to quantum computing. It introduced and explained some of the basic fundamentals of quantum computing, the Principle of Delayed Measurement and Quantum Erasure. We then went on to explain the 3 cornerstone algorithms of computing computing in detail: 
+Our report included a brief introduction to quantum mechanics and how it gave rise to quantum computing. It introduced and explained some of the basic fundamentals of quantum computing, the Principle of Delayed Measurement and Quantum Erasure which can be considered as an advancement to the double slit experiment.<br/>
+1. In this experiment scietists tried to get the interference pattern(position) and the knowledge of the slit from which it passed(momentum) but the photon prevented it from making sure that the information remains hidden and the particle follows the uncertainty principle.
+2. One of the major observation that can be made from the experiment was photons predicting the measurement(position or momentum measurement) of their entangled counterparts done in future, explanation of such behaviour comes down to the time depedence of the measurment and the behaviour of entangled quantum particles.
 
-1. Simon's Algorithm
-2. Shor's Factoring Algorithm
+We then went on to explain the 3 cornerstone algorithms of computing computing in detail: 
+
+1. Simon's Algorithm: One of the first algorithm which exploited the use of the quantum particles and the information they store, gave an exponential speed up to the simon's problem of finding period of an unknown boolean black box function. Paved way for other algorithms such as the shor's algorithm and other period finding base algorithms.
+2. Shor's Factoring Algorithm: Shor's algorithm is one of the algorithms that shows how quantum computers can give exponential speedups over classical algorithms. This factoring algorithm has the potential to break the RSA encryption which is considered as the standard and most secure among the encryption methods.
 3. Grover's Search Algorithm
 
 Our presentation also included a talk about some of the interesting applications of quantum computing which we came across from research papers. These included
